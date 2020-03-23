@@ -6,11 +6,10 @@ import { Context } from '../context/BlogContext'
 
 
 const IndexScreen = ({navigation}) => {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost } = useContext(Context);
 
   return (
     <View>
-      <Button title='Add Post' onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={(blogPost) => blogPost.title}
@@ -24,6 +23,12 @@ const IndexScreen = ({navigation}) => {
           </View>
           </TouchableOpacity>
         }} />
+          <TouchableOpacity
+          onPress= {() => navigation.navigate('CreateBlog')}
+          activeOpacity={0.7}
+          style={styles.floatingButton}>
+         <FontAwesome5 style={styles.addFolatingButtonIcon} name='plus' />
+         </TouchableOpacity>
     </View>
   )
 };
@@ -43,7 +48,21 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 24,
     color: 'red'
+  },  
+  floatingButton: {
+    position: 'absolute',
+    right: 20,
+    top:480,
+    borderWidth:15,
+    borderRadius:50,
+    borderColor:'blue'
+  },  
+  addFolatingButtonIcon: {
+    fontSize:32,
+    color:'white',
+    backgroundColor:'blue'
   }
+ 
 });
 
 export default IndexScreen;
